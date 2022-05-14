@@ -115,6 +115,11 @@ const routes = [
                 component: () => import('./pages/CrudDemo.vue')
             },
             {
+                path:'/crudsupply',
+                name:'crudsupply',
+                component:()=>import('./pages/CrudSupplier.vue')
+            },
+            {
                 path: '/timeline',
                 name: 'timeline',
                 component: () => import('./pages/TimelineDemo.vue')
