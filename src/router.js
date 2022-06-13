@@ -110,9 +110,9 @@ const routes = [
                 component: () => import('./components/MiscDemo.vue')
             },
             {
-                path: '/crud',
-                name: 'crud',
-                component: () => import('./pages/CrudDemo.vue')
+                path: '/items',
+                name: 'items',
+                component: () => import('./pages/Items.vue')
             },
             {
                 path:'/crudsupply',
@@ -174,7 +174,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHashHistory(process.env.BASE_URL),
     routes,
 });
 
