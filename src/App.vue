@@ -79,6 +79,7 @@ export default {
 					label: 'Pages', icon: 'pi pi-fw pi-clone',
 					items: [
 						{label: 'Items', icon: 'pi pi-fw pi-tags', to: '/items'},
+                        {label: 'ItemCategories', icon: 'pi pi-fw pi-server', to: '/itemCategories'},
                         {label: 'Supplier', icon:'pi pi-fw pi-user-edit',to:'/crudsupply'},
 						{label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/timeline'},
                         {label: 'Landing', icon: 'pi pi-fw pi-globe', to: '/landing'},
