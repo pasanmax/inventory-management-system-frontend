@@ -190,6 +190,7 @@ export default {
 	name: 'Items',
 	data() {
 		return {
+			test: [],
 			items: null,
 			itemDialog: false,
 			deleteItemDialog: false,
