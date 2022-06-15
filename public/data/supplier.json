@@ -1,27 +1,18 @@
-{
-	"data": [
-		{
-			"id": "1000",
-			"code": "f230fh0g3",
-			"name": "James Smith",
-			"description": "Supplier for Bamboo watches",
-			"contactNo":774079637,
-			"category": "Accessories",
-			"email": "dev.akash2024@gmail.com",
-			"status": "Active",
-			"rating": 5
-		},
-        {
-            "id": "1001",
-			"code": "S4mkkfh0g3",
-			"name": "Willie Wonka",
-			"description": "Supplier for bags",
-			"contactNo": 12331564,
-			"category": "Accessories",
-			"email ": "wilie@wonka.uk",
-			"status": "In-Active",
-			"rating": 3
-        }
+[
+	{
+		"id": 1,
+		"fname": "Kamal M",
+		"lname": "Jayasinghe",
+		"nic": "886203215V",
+		"email": "dellsrilanka@info.lk",
+		"contactNo": 1124450012,
+		"passwordKey": "kamal@123",
+		"companyName": "Dell",
+		"yearEstablished": "2004-05-30T18:00:00.000+00:00",
+		"description": "Electronic devices",
+		"isActive": true,
+		"website": null,
+		"verifiedDate": null
+	}
+]
 
-	]
-}
