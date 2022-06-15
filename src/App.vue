@@ -79,14 +79,8 @@ export default {
 					label: 'Pages', icon: 'pi pi-fw pi-clone',
 					items: [
 						{label: 'Items', icon: 'pi pi-fw pi-tags', to: '/items'},
-                        {label: 'Supplier', icon:'pi pi-fw pi-user-edit',to:'/suppliers'},
-						// {label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/timeline'},
-                        // {label: 'Landing', icon: 'pi pi-fw pi-globe', to: '/landing'},
-                        // {label: 'Login', icon: 'pi pi-fw pi-sign-in', to: '/login'},
-                        // {label: 'Error', icon: 'pi pi-fw pi-times-circle', to: '/error'},
-                        // {label: 'Not Found', icon: 'pi pi-fw pi-exclamation-circle', to: '/notfound'},
-                        // {label: 'Access Denied', icon: 'pi pi-fw pi-lock', to: '/access'},
-						// {label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: '/empty'},
+            {label: 'Supplier', icon:'pi pi-fw pi-user-edit',to:'/suppliers'},
+            {label: 'ItemCategories', icon: 'pi pi-fw pi-server', to: '/itemCategories'},
 					]
 				},
                 // {
