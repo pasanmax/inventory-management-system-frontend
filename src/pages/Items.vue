@@ -90,7 +90,7 @@
 					</div>
 					<div class="field">
 						<label for="description">Description</label>
-						<Textarea id="description" v-model="item.description" required="true" rows="3" cols="20" />
+						<Textarea id="description" v-model="item.description" rows="3" cols="20" />
 					</div>
 					<div class="field-checkbox mb-3">
 						<Checkbox id="isActive" name="option" value="1" v-model="isActive" />
@@ -190,7 +190,6 @@ export default {
 	name: 'Items',
 	data() {
 		return {
-			test: [],
 			items: null,
 			itemDialog: false,
 			deleteItemDialog: false,
