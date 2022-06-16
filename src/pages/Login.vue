@@ -15,10 +15,10 @@
                 
                     <div class="w-full md:w-10 mx-auto">
                         <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                        <InputText id="email1" v-model="email" type="text" class="w-full mb-3" placeholder="Email" style="padding:1rem;" />
+                        <InputText id="email1" v-model="authenticationRequest.email" type="text" class="w-full mb-3" placeholder="Email" style="padding:1rem;" />
                 
                         <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
-                        <Password id="password1" v-model="password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem"></Password>
+                        <Password id="password1" v-model="authenticationRequest.password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem"></Password>
                 
                         <div class="flex align-items-center justify-content-between mb-5">
                             <div class="flex align-items-center">
@@ -27,7 +27,7 @@
                             </div>
                             <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
                         </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl"></button>
+                        <Button label="Sign In" class="w-full p-3 text-xl" @click="login"></button>
                     </div>
                 </div>
             </div>
@@ -36,11 +36,14 @@
 </template>
 
 <script>
+import AuthService from '../service/AuthService';
 export default {
     data() {
         return {
-            email: '',
-            password: '',
+            authenticationRequest: {
+                email: '',
+                password: '',
+            },
             checked: false
         }
     },
@@ -48,6 +51,22 @@ export default {
         logoColor() {
             if (this.$appState.darkTheme) return 'white';
             return 'dark';
+        }
+    },
+    methods: {
+        async login() {
+            //console.log('Hi');
+            var data = {
+                userName: this.authenticationRequest.email,
+                password: this.authenticationRequest.password
+            };
+            //console.log(data);
+            await AuthService.login(data).then(res => {
+                console.log(res.data);
+                this.$router.push('/');
+            }).catch(e => {
+                console.log(e);
+            });
         }
     }
 }

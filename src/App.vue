@@ -79,8 +79,8 @@ export default {
 					label: 'Pages', icon: 'pi pi-fw pi-clone',
 					items: [
 						{label: 'Items', icon: 'pi pi-fw pi-tags', to: '/items'},
-            {label: 'Supplier', icon:'pi pi-fw pi-user-edit',to:'/suppliers'},
-            {label: 'ItemCategories', icon: 'pi pi-fw pi-server', to: '/itemCategories'},
+                        {label: 'Supplier', icon:'pi pi-fw pi-user-edit',to:'/suppliers'},
+                        {label: 'ItemCategories', icon: 'pi pi-fw pi-server', to: '/itemCategories'},
 					]
 				},
                 // {
