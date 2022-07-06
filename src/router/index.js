@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import App from './App.vue';
+import App from '../App.vue';
+import store from '@/store'
 //import Login from './pages/Login.vue';
 
 const routes = [
@@ -7,36 +8,39 @@ const routes = [
         // path: '/',
         // name: 'app',
         // component: () => import('./pages/Login.vue')
-        path: '/',
+        path: '/dashboard',
         name: 'app',
         component: App,
+        meta: {
+            requiresAuth: true
+        },
         children: [
             {
                 path: '',
                 name: 'dashboard',
-                component: () => import('./components/Dashboard.vue')
+                component: () => import('../components/Dashboard.vue')
             },
             {
                 path: '/items',
                 name: 'items',
-                component: () => import('./pages/Items.vue')
+                component: () => import('../pages/Items.vue')
             },
             {
                 path: '/itemcategories',
                 name: 'itemcategories',
-                component: () => import('./pages/ItemCategories.vue')
+                component: () => import('../pages/ItemCategories.vue')
             },
             {
                 path:'/suppliers',
                 name:'suppliers',
-                component:()=>import('./pages/Suppliers.vue')
+                component:()=>import('../pages/Suppliers.vue')
             }
         ]
     },
     {
-        path: '/login',
+        path: '/',
         name: 'login',
-        component: () => import('./pages/Login.vue')
+        component: () => import('../pages/Login.vue')
     }
 ]
     //         {
@@ -212,6 +216,18 @@ const routes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters.isLoggedIn) {
+            next()
+            return
+        }
+        next('/')
+    } else {
+        next()
+    }
 });
 
 export default router;
