@@ -6,7 +6,8 @@ import './assets/styles/layout.scss';
 import './assets/demo/flags/flags.css';
 
 import { createApp, reactive } from 'vue';
-import router from './router';
+import router from './router/index';
+import store from './store/index'
 import AppWrapper from './AppWrapper.vue';
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -109,6 +110,7 @@ app.config.globalProperties.$appState = reactive({ theme: 'lara-light-indigo', d
 app.use(PrimeVue, { ripple: true, inputStyle: 'outlined' });
 app.use(ConfirmationService);
 app.use(ToastService);
+app.use(store);
 app.use(router);
 
 app.directive('tooltip', Tooltip);

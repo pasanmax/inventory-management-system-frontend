@@ -1,8 +1,16 @@
 import http from '../http-common';
 
 class AuthService {
-    login(data) {
-        return http.post('/auth/login', data);
+    async login(data) {
+        return await http.post('/auth/login', data);
+    }
+
+    async userInfo() {
+        return await http.get('/auth/userinfo', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('user')
+            }
+        });
     }
 }
 
