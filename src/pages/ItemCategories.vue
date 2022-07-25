@@ -31,21 +31,21 @@
 					</template>
 
 					<Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-					<Column field="code" header="ID" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+					<Column field="id" header="ID" :sortable="true" headerStyle="width:14%; min-width:10rem;">
 						<template #body="slotProps">
-							<span class="p-column-title">Id</span>
+							<span class="p-column-title">id</span>
 							{{slotProps.data.code}}
 						</template>
 					</Column>
 					<Column field="code" header="Category Code" :sortable="true" headerStyle="width:14%; min-width:10rem;">
 						<template #body="slotProps">
-							<span class="p-column-title">Category Code</span>
+							<span class="p-column-title">code</span>
 							{{slotProps.data.code}}
 						</template>
 					</Column>
 					<Column field="name" header="Category Name" :sortable="true" headerStyle="width:14%; min-width:10rem;">
 						<template #body="slotProps">
-							<span class="p-column-title">Category Name</span>
+							<span class="p-column-title">name</span>
 							{{slotProps.data.name}}
 						</template>
 					</Column>
@@ -61,9 +61,9 @@
 							{{formatCurrency(slotProps.data.price)}}
 						</template>
 					</Column-->
-					<Column field="category" header="Description" :sortable="true" headerStyle="width:14%; min-width:10rem;">
+					<Column field="description" header="Description" :sortable="true" headerStyle="width:14%; min-width:10rem;">
 						<template #body="slotProps">
-							<span class="p-column-title">Description</span>
+							<span class="p-column-title">description</span>
 							{{slotProps.data.category}}
 						</template>
 					</Column>
@@ -87,8 +87,13 @@
 					</Column>
 				</DataTable>
 
-				<Dialog v-model:visible="itemCategoryDialog" :style="{width: '450px'}" header="Item Details" :modal="true" class="p-fluid">
+				<Dialog v-model:visible="itemCategoryDialog" :style="{width: '450px'}" header="Item Category Details" :modal="true" class="p-fluid">
 					<!-- <img :src="'images/product/' + product.image" :alt="product.image" v-if="product.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" /> -->
+					<div class="field">
+						<label for="code">Item Category Code</label>
+						<InputText id="code" v-model.trim="itemCategory.code" required="true" autofocus :class="{'p-invalid': submitted && !itemCategory.name}" />
+						<small class="p-invalid" v-if="submitted && !itemCategory.code">Code is required.</small>
+					</div>
 					<div class="field">
 						<label for="name">Item Category Name</label>
 						<InputText id="name" v-model.trim="itemCategory.name" required="true" autofocus :class="{'p-invalid': submitted && !itemCategory.name}" />
@@ -98,14 +103,14 @@
 						<label for="description">Description</label>
 						<Textarea id="description" v-model="itemCategory.description" required="true" rows="3" cols="20" />
 					</div>
-					<div class="field-checkbox mb-3">
+					<!--<div class="field-checkbox mb-3">
 						<Checkbox id="isActive" name="option" value="1" v-model="isActive" />
 						<label for="isActive">Is Active</label>
-					</div>
-					<div class="field-checkbox mb-3">
+					</div>-->
+					<!--<div class="field-checkbox mb-3">
 						<Checkbox id="isReturnable" name="option" value="1" v-model="isReturnable" />
 						<label for="isReturnable">Is Returnable</label>
-					</div>
+					</div>-->
 					<!-- <div class="field">
 						<label for="inventoryStatus" class="mb-3">Inventory Status</label>
 						<Dropdown id="inventoryStatus" v-model="itemcategory.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status">
@@ -123,7 +128,7 @@
 						</Dropdown>
 					</div> -->
 
-					<div class="field">
+					<!--<div class="field">
 						<label class="mb-3">Categories</label>
 						<div class="formgrid grid">
 							<div class="field-radiobutton col-6">
@@ -143,7 +148,7 @@
 								<label for="category4">Fitness</label>
 							</div>
 						</div>
-					</div>
+					</div>-->
 
 					<div class="formgrid grid">
 						<!--<div class="field col">
