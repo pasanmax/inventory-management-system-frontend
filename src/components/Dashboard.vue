@@ -244,6 +244,7 @@
 <script>
 import EventBus from '@/AppEventBus';
 import ProductService from '../service/ProductService';
+//import AuthService from '../service/AuthService';
 
 export default {
 	data() {
@@ -302,6 +303,17 @@ export default {
     },
 	created() {
 		this.productService = new ProductService();
+		// await AuthService.userInfo().then(response => {
+		// 	console.log(response);
+		// }).catch(e => {
+		// 	console.log(e);
+		// 	this.$router.push('/');
+		// })
+	},
+	computed: {
+		isLoggedIn() {
+			return this.$store.getters.isLoggedIn;
+		}
 	},
 	methods: {
 		formatCurrency(value) {

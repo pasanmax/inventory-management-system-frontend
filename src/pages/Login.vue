@@ -13,21 +13,31 @@
                         <span class="text-600 font-medium">Sign in to continue</span>
                     </div>
                 
+                    
                     <div class="w-full md:w-10 mx-auto">
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                        <InputText id="email1" v-model="email" type="text" class="w-full mb-3" placeholder="Email" style="padding:1rem;" />
+                        <label for="username" class="block text-900 text-xl font-medium mb-2">Username</label>
+                        <InputText id="username" v-model="state.authRequest.userName" type="text" class="w-full mb-3" placeholder="Username" style="padding:1rem;" />
+                        <span v-if="v$.authRequest.userName.$error" style="color:red">
+                            {{ v$.authRequest.userName.$errors[0].$message }}
+                        </span>
                 
-                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
-                        <Password id="password1" v-model="password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem"></Password>
+                        <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
+                        <Password id="password" v-model="state.authRequest.password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem" :feedback="false"></Password>
+                        <span v-if="v$.authRequest.password.$error" style="color:red">
+                            {{ v$.authRequest.password.$errors[0].$message }}
+                        </span>
                 
                         <div class="flex align-items-center justify-content-between mb-5">
                             <div class="flex align-items-center">
-                                <Checkbox id="rememberme1" v-model="checked" :binary="true" class="mr-2"></Checkbox>
-                                <label for="rememberme1">Remember me</label>
+                                <Checkbox id="rememberme" v-model="checked" :binary="true" class="mr-2"></Checkbox>
+                                <label for="rememberme">Remember me</label>
                             </div>
                             <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
                         </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl"></button>
+                        <div v-if="message" class="mb-5" style="color:red">
+                            {{ message }}
+                        </div>
+                        <Button label="Sign In" class="w-full p-3 text-xl" @click="login"></button>
                     </div>
                 </div>
             </div>
@@ -36,12 +46,40 @@
 </template>
 
 <script>
+//import AuthService from '../service/AuthService';
+import useValidate from '@vuelidate/core'
+import { required, minLength, helpers } from '@vuelidate/validators'
+import { reactive, computed } from 'vue';
+
 export default {
+    setup() {
+        const state = reactive({
+            authRequest: {
+                userName: '',
+                password: '',
+            },
+        });
+
+        const rules = computed(() => {
+            return {
+                authRequest: {
+                    userName: { required: helpers.withMessage('Username is required', required) },
+                    password: { required: helpers.withMessage('Password is required', required), minLength: minLength(8) },
+                },
+            }
+        });
+
+        const v$ = useValidate(rules, state);
+
+        return {
+            state,
+            v$,
+        }
+    },
     data() {
         return {
-            email: '',
-            password: '',
-            checked: false
+            checked: false,
+            message: ""
         }
     },
     computed: {
@@ -49,6 +87,37 @@ export default {
             if (this.$appState.darkTheme) return 'white';
             return 'dark';
         }
+    },
+    methods: {
+        async login() {
+            this.v$.$validate()
+            if(!this.v$.$error) {
+                // await AuthService.login(this.state.authRequest).then(response => {
+                //     //console.log(res.data);
+                //     localStorage.setItem('user', response.data.token);
+                //     this.$router.push('/dashboard');
+                // }).catch(e => {
+                //     console.log(e);
+                //     this.message =
+                //         (e.response &&
+                //         e.response.data &&
+                //         e.response.data.message) ||
+                //         e.message ||
+                //         e.toString();
+                // });
+                this.$store.dispatch("LOGIN", this.state.authRequest)
+                .then(() => this.$router.push('/dashboard'))
+                .catch(e => {
+                    console.log(e);
+                    this.message =
+                        (e.response &&
+                        e.response.data &&
+                        e.response.data.message) ||
+                        e.message ||
+                        e.toString();
+                });
+            }
+        },
     }
 }
 </script>
