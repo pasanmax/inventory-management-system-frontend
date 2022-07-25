@@ -182,7 +182,7 @@ export default {
 		this.initFilters();
 	},
 	mounted() {
-		this.SupplierService.getSuppliers().then(data => this.suppliers = data);
+		//this.SupplierService.getSuppliers().then(data => this.suppliers = data);
 	},
 	methods: {
 		formatCurrency(value) {
